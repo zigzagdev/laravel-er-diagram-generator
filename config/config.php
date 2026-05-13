@@ -11,6 +11,13 @@ return [
     ],
 
     /*
+     * If you want to enable debug logging when a model method cannot be
+     * analyzed during relation discovery, set this to true.
+     * Useful for troubleshooting unexpected ERD generation issues.
+     */
+    // 'debug_relations' => true,
+
+    /*
      * If you want to ignore complete models or certain relations of a specific model,
      * you can specify them here.
      * To ignore a model completely, just add the fully qualified classname.

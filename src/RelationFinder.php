@@ -9,6 +9,7 @@ use Illuminate\Support\Collection;
 use ReflectionClass;
 use ReflectionMethod;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 
 class RelationFinder
@@ -95,7 +96,13 @@ class RelationFinder
                     )
                 ];
             }
-        } catch (\Throwable $e) {}
+        } catch (\Throwable $e) {
+            // Non-relation methods may throw when invoked; this is expected.
+            // To enable debug logging, set 'debug_relations' => true in config/erd-generator.php
+            if (config('erd-generator.debug_relations', false)) {
+                Log::debug("Could not analyze method {$method->getName()} on {$model}: {$e->getMessage()}");
+            }
+        }
         return null;
     }
 
